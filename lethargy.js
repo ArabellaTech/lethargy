@@ -1,6 +1,4 @@
-var root;
-
-root.Lethargy = (function() {
+var Lethargy = (function() {
   function Lethargy(stability, sensitivity, tolerance, delay) {
     this.stability = stability != null ? Math.abs(stability) : 8;
     this.sensitivity = sensitivity != null ? 1 + Math.abs(sensitivity) : 100;
@@ -94,4 +92,4 @@ root.Lethargy = (function() {
 
 })();
 
-module.exports = root.Lethargy;
+module.exports = Lethargy;
