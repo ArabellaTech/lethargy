@@ -1,5 +1,7 @@
-export default class Lethargy {
-  constructor(stability, sensitivity, tolerance, delay) {
+var root;
+
+root.Lethargy = (function() {
+  function Lethargy(stability, sensitivity, tolerance, delay) {
     this.stability = stability != null ? Math.abs(stability) : 8;
     this.sensitivity = sensitivity != null ? 1 + Math.abs(sensitivity) : 100;
     this.tolerance = tolerance != null ? 1 + Math.abs(tolerance) : 1.1;
@@ -30,7 +32,7 @@ export default class Lethargy {
     }).call(this);
   }
 
-  check(e) {
+  Lethargy.prototype.check = function(e) {
     var lastDelta;
     e = e.originalEvent || e;
     if (e.wheelDelta != null) {
@@ -52,9 +54,9 @@ export default class Lethargy {
       return this.isInertia(-1);
     }
     return false;
-  }
+  };
 
-  isInertia(direction) {
+  Lethargy.prototype.isInertia = function(direction) {
     var lastDeltas, lastDeltasNew, lastDeltasOld, newAverage, newSum, oldAverage, oldSum;
     lastDeltas = direction === -1 ? this.lastDownDeltas : this.lastUpDeltas;
     if (lastDeltas[0] === null) {
@@ -78,13 +80,18 @@ export default class Lethargy {
     } else {
       return false;
     }
-  }
+  };
 
-  showLastUpDeltas() {
+  Lethargy.prototype.showLastUpDeltas = function() {
     return this.lastUpDeltas;
-  }
+  };
 
-  showLastDownDeltas() {
+  Lethargy.prototype.showLastDownDeltas = function() {
     return this.lastDownDeltas;
-  }
-}
+  };
+
+  return Lethargy;
+
+})();
+
+module.exports = root.Lethargy;
